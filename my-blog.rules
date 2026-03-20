@@ -1,0 +1,29 @@
+# Project Rules — My Personal Blog
+
+## Project Info
+- Owner: Do Duc Khanh Nguyen
+- Type: Personal Blog & Portfolio
+- Stack: Next.js 15, Tailwind CSS, JavaScript
+
+## Code Rules
+- Always use JavaScript, never TypeScript
+- Always use Tailwind CSS, never write plain CSS
+- Always use Next.js Image component for images, never <img> tag
+- Always make UI responsive (mobile-first)
+- Always add comments in English explaining each section
+
+## Folder Structure
+- Pages → app/
+- Components → app/components/
+- Images → public/images/
+- API routes → app/api/
+
+## Style Guide
+- Color scheme: minimal, professional (vintage style)
+- Font: clean, readable
+- No unnecessary animations
+
+## Important
+- This is a portfolio site for a Transportation & Logistics Engineer    
+- Keep code clean and well-structured
+- Always explain what you built after each task

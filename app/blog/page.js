@@ -3,34 +3,51 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import portfolioImg from "../public/images/portfolio.jpg";
-import iconImg from "../public/images/icon.png";
+import iconImg from "../../public/images/icon.png";
 
-export default function Home() {
+export default function BlogListing() {
   // Trạng thái mở/đóng menu trên mobile
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  // Trạng thái lọc tìm kiếm & category
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-  // Dữ liệu mẫu cho Featured Posts
-  const featuredPosts = [
+  // Danh mục thể loại
+  const categories = ["All", "Life", "Data Analysis", "Science"];
+
+  // Dữ liệu mẫu bài viết cho Blog
+  const allPosts = [
     {
       title: "Dashboard for my health data from daily tracking by mobile app and watch",
-      date: " 16 March 2026",
+      date: "16 March 2026",
+      category: "Data Analysis",
       excerpt: "I have been using mobile app and watch to track my health data for a few years. I decided to create a dashboard to visualize my health data and share it with you...",
       link: "#"
     },
     {
       title: "My family tree",
       date: "15 March 2026",
+      category: "Life",
       excerpt: "I have been using Heritage website to build my family tree. I decided to create a dashboard to visualize my family tree and share it with you...",
       link: "#"
     },
     {
       title: "A short story about my life",
       date: "10 March 2026",
+      category: "Life",
       excerpt: "This is a short story about my life with many ups and downs. I hope you enjoy it...",
       link: "#"
     }
   ];
+
+  // Logic Lọc bài viết
+  const filteredPosts = allPosts.filter(post => {
+    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div className="min-h-screen bg-[#FDFCF7] text-[#2C2C2C] font-sans antialiased">
@@ -48,8 +65,8 @@ export default function Home() {
                 <Image 
                   src={iconImg} 
                   alt="Icon" 
-                  width={40} 
-                  height={40} 
+                  width={34} 
+                  height={34} 
                 />
                 <span>Do Duc Khanh Nguyen</span>
               </Link>
@@ -58,7 +75,7 @@ export default function Home() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
               <Link href="/" className="text-sm font-medium hover:text-[#824D3B] transition-colors">Home</Link>
-              <Link href="/blog" className="text-sm font-medium hover:text-[#824D3B] transition-colors">Blog</Link>
+              <Link href="/blog" className="text-sm font-medium text-[#824D3B] hover:text-[#824D3B] transition-colors">Blog</Link>
               <Link href="/about" className="text-sm font-medium hover:text-[#824D3B] transition-colors">About</Link>
             </nav>
 
@@ -85,81 +102,82 @@ export default function Home() {
           <div className="md:hidden border-t border-[#E5E3DB] bg-[#FDFCF7]">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <Link href="/" className="block px-3 py-2 text-base font-medium hover:bg-[#F3EFDF] rounded-md">Home</Link>
-              <Link href="/blog" className="block px-3 py-2 text-base font-medium hover:bg-[#F3EFDF] rounded-md">Blog</Link>
+              <Link href="/blog" className="block px-3 py-2 text-base font-medium text-[#824D3B] hover:bg-[#F3EFDF] rounded-md">Blog</Link>
               <Link href="/about" className="block px-3 py-2 text-base font-medium hover:bg-[#F3EFDF] rounded-md">About</Link>
             </div>
           </div>
         )}
       </header>
 
-      <main>
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        
         {/* =====================================================================
-            2. HERO SECTION
+            2. PAGE TITLE & SUBTITLE
             ===================================================================== */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 flex flex-col-reverse md:flex-row items-center justify-between gap-12">
+        <div className="text-center mb-12">
+          <h1 className="font-serif text-4xl md:text-5xl font-bold tracking-tight mb-4 text-[#2C2C2C]">
+            Blog
+          </h1>
+          <p className="text-base md:text-lg text-[#5A5A5A] max-w-xl mx-auto leading-relaxed">
+            A little corner for sharing my thoughts in every aspect of the surrounding world.
+          </p>
+        </div>
+
+        {/* =====================================================================
+            3. SEARCH BAR & CATEGORIES FILTER
+            ===================================================================== */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12 pb-8 border-b border-[#E5E3DB]">
           
-          {/* Info Side */}
-          <div className="flex-1 text-center md:text-left">
-            <h1 className="font-serif text-4xl md:text-6xl font-bold tracking-tight mb-4">
-              Do Duc Khanh Nguyen
-            </h1>
-            <h2 className="text-lg md:text-xl font-medium text-[#824D3B] mb-6 font-mono tracking-wide">
-              Transportation, Logistics & Data Engineer
-            </h2>
-            <p className="text-base md:text-lg text-[#5A5A5A] mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed">
-              Here is a place where I shared my interests, experiences, and thoughts on various topics. I hope you enjoy it...
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Link href="/blog" className="inline-flex items-center justify-center px-6 py-3 border border-[#824D3B] bg-[#824D3B] text-[#FDFCF7] font-medium rounded shadow-sm hover:opacity-90 transition-all duration-200">
-                Read Blog
-              </Link>
-              <Link href="#" className="inline-flex items-center justify-center px-6 py-3 border border-[#AC9E85] text-[#2C2C2C] font-medium rounded hover:bg-[#F3EFDF] transition-all duration-200">
-                View Portfolio
-              </Link>
+          {/* List Categories */}
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-1.5 text-xs font-medium rounded border transition-all duration-200 ${
+                  selectedCategory === cat
+                    ? "bg-[#824D3B] text-[#FDFCF7] border-[#824D3B]"
+                    : "border-[#DCD5C6] text-[#6B5B4C] hover:bg-[#F3EFDF]"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Search Bar Input */}
+          <div className="relative max-w-sm w-full">
+            <input
+              type="text"
+              placeholder="Search articles..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border border-[#DCD5C6] rounded bg-white text-sm text-[#2C2C2C] focus:outline-none focus:border-[#824D3B] focus:ring-1 focus:ring-[#824D3B] placeholder-[#AC9E85] transition-all"
+            />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#AC9E85]">
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
             </div>
           </div>
-
-          {/* Avatar Side */}
-          <div className="flex-1 flex justify-center">
-            <div className="max-w-md border-2 border-[#AC9E85] p-1 bg-white shadow-md">
-              <Image 
-                src={portfolioImg} 
-                alt="Do Duc Khanh Nguyen"
-                className="w-full h-auto filter sepia-[5%] contrast-[98%]"
-                priority
-              />
-            </div>
-          </div>
-        </section>
+        </div>
 
         {/* =====================================================================
-            3. ABOUT SNIPPET
+            4. RESPONSIVE LISTING GRID
             ===================================================================== */}
-        <section className="bg-[#F3EFDF] border-y border-[#E5E3DB] py-16">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 className="font-serif text-2xl font-bold mb-4">About Me</h3>
-            <p className="text-base md:text-lg text-[#4A4A4A] leading-relaxed italic">
-              "I am a Transportation, Logistics & Data Engineer. I am passionate about Data Science, Computer Science and Technology. I have a strong interest in Sports and Health Science. "
-            </p>
-          </div>
-        </section>
-
-        {/* =====================================================================
-            4. FEATURED POSTS Section
-            ===================================================================== */}
-        <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="flex justify-between items-baseline mb-12">
-            <h3 className="font-serif text-3xl font-bold">Featured Posts</h3>
-            <a href="#" className="text-sm font-medium text-[#824D3B] hover:underline">View all &rarr;</a>
-          </div>
-
-          <div className="grid gap-8 md:grid-cols-3">
-            {featuredPosts.map((post, index) => (
-              <article key={index} className="flex flex-col bg-white border border-[#E5E3DB] rounded p-6 hover:shadow-md transition-shadow duration-200">
-                <span className="text-xs font-mono text-[#AC9E85] mb-2">{post.date}</span>
-                <h4 className="font-serif text-xl font-bold mb-3 hover:text-[#824D3B] transition-colors">
+        {filteredPosts.length > 0 ? (
+          <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {filteredPosts.map((post, index) => (
+              <article key={index} className="flex flex-col bg-white border border-[#E5E3DB] rounded p-6 shadow-sm hover:shadow-md transition-shadow duration-200">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-xs font-mono text-[#AC9E85]">{post.date}</span>
+                  <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#824D3B] bg-[#FDFCF7] border border-[#DCD5C6] rounded">
+                    {post.category}
+                  </span>
+                </div>
+                <h2 className="font-serif text-xl font-bold mb-3 hover:text-[#824D3B] transition-colors leading-snug">
                   <a href={post.link}>{post.title}</a>
-                </h4>
+                </h2>
                 <p className="text-sm text-[#5A5A5A] mb-5 flex-grow leading-relaxed">
                   {post.excerpt}
                 </p>
@@ -171,12 +189,14 @@ export default function Home() {
               </article>
             ))}
           </div>
-        </section>
+        ) : (
+          <div className="text-center py-12 text-[#AC9E85]">
+            <p>No posts found matching your criteria.</p>
+          </div>
+        )}
+
       </main>
 
-      {/* =====================================================================
-          5. FOOTER SECTION
-          ===================================================================== */}
       <footer className="border-t border-[#E5E3DB] bg-[#FDFCF7] py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="text-sm text-[#AC9E85] font-mono">
