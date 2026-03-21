@@ -1,100 +1,43 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import portfolioImg from "../public/images/portfolio.jpg";
-import iconImg from "../public/images/icon.png";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import PostCard from "./components/PostCard";
+import SectionTitle from "./components/SectionTitle";
 
 export default function Home() {
-  // Trạng thái mở/đóng menu trên mobile
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Dữ liệu mẫu cho Featured Posts
   const featuredPosts = [
     {
       title: "Dashboard for my health data from daily tracking by mobile app and watch",
-      date: " 16 March 2026",
+      date: "16 March 2026",
+      category: "Data Analysis",
       excerpt: "I have been using mobile app and watch to track my health data for a few years. I decided to create a dashboard to visualize my health data and share it with you...",
-      link: "#"
+      slug: "#"
     },
     {
       title: "My family tree",
       date: "15 March 2026",
+      category: "Life",
       excerpt: "I have been using Heritage website to build my family tree. I decided to create a dashboard to visualize my family tree and share it with you...",
-      link: "#"
+      slug: "#"
     },
     {
       title: "A short story about my life",
       date: "10 March 2026",
+      category: "Life",
       excerpt: "This is a short story about my life with many ups and downs. I hope you enjoy it...",
-      link: "#"
+      slug: "#"
     }
   ];
 
   return (
     <div className="min-h-screen bg-[#FDFCF7] text-[#2C2C2C] font-sans antialiased">
-      
-      {/* =====================================================================
-          1. HEADER SECTION & NAVIGATION
-          ===================================================================== */}
-      <header className="sticky top-0 z-50 bg-[#FDFCF7]/90 backdrop-blur-sm border-b border-[#E5E3DB]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            
-            {/* Logo/Name */}
-            <div className="flex-shrink-0">
-              <Link href="/" className="flex items-center space-x-3 font-serif text-xl font-bold tracking-tight hover:text-[#824D3B] transition-colors">
-                <Image 
-                  src={iconImg} 
-                  alt="Icon" 
-                  width={40} 
-                  height={40} 
-                />
-                <span>Do Duc Khanh Nguyen</span>
-              </Link>
-            </div>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-sm font-medium hover:text-[#824D3B] transition-colors">Home</Link>
-              <Link href="/blog" className="text-sm font-medium hover:text-[#824D3B] transition-colors">Blog</Link>
-              <Link href="/about" className="text-sm font-medium hover:text-[#824D3B] transition-colors">About</Link>
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md hover:bg-[#F3EFDF] focus:outline-none"
-              >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  {isMenuOpen ? (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Mobile Navigation Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-[#E5E3DB] bg-[#FDFCF7]">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link href="/" className="block px-3 py-2 text-base font-medium hover:bg-[#F3EFDF] rounded-md">Home</Link>
-              <Link href="/blog" className="block px-3 py-2 text-base font-medium hover:bg-[#F3EFDF] rounded-md">Blog</Link>
-              <Link href="/about" className="block px-3 py-2 text-base font-medium hover:bg-[#F3EFDF] rounded-md">About</Link>
-            </div>
-          </div>
-        )}
-      </header>
+      <Header />
 
       <main>
         {/* =====================================================================
-            2. HERO SECTION
+            1. HERO SECTION
             ===================================================================== */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 flex flex-col-reverse md:flex-row items-center justify-between gap-12">
           
@@ -133,11 +76,11 @@ export default function Home() {
         </section>
 
         {/* =====================================================================
-            3. ABOUT SNIPPET
+            2. ABOUT SNIPPET
             ===================================================================== */}
         <section className="bg-[#F3EFDF] border-y border-[#E5E3DB] py-16">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 className="font-serif text-2xl font-bold mb-4">About Me</h3>
+            <h3 className="font-serif text-2xl font-bold mb-4">About</h3>
             <p className="text-base md:text-lg text-[#4A4A4A] leading-relaxed italic">
               "I am a Transportation, Logistics & Data Engineer. I am passionate about Data Science, Computer Science and Technology. I have a strong interest in Sports and Health Science. "
             </p>
@@ -145,46 +88,30 @@ export default function Home() {
         </section>
 
         {/* =====================================================================
-            4. FEATURED POSTS Section
+            3. FEATURED POSTS Section
             ===================================================================== */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
           <div className="flex justify-between items-baseline mb-12">
-            <h3 className="font-serif text-3xl font-bold">Featured Posts</h3>
-            <a href="#" className="text-sm font-medium text-[#824D3B] hover:underline">View all &rarr;</a>
+            <SectionTitle title="Featured Posts" centered={false} />
+            <Link href="/blog" className="text-sm font-medium text-[#824D3B] hover:underline">View all &rarr;</Link>
           </div>
 
           <div className="grid gap-8 md:grid-cols-3">
             {featuredPosts.map((post, index) => (
-              <article key={index} className="flex flex-col bg-white border border-[#E5E3DB] rounded p-6 hover:shadow-md transition-shadow duration-200">
-                <span className="text-xs font-mono text-[#AC9E85] mb-2">{post.date}</span>
-                <h4 className="font-serif text-xl font-bold mb-3 hover:text-[#824D3B] transition-colors">
-                  <a href={post.link}>{post.title}</a>
-                </h4>
-                <p className="text-sm text-[#5A5A5A] mb-5 flex-grow leading-relaxed">
-                  {post.excerpt}
-                </p>
-                <div className="mt-auto">
-                  <a href={post.link} className="text-xs font-bold uppercase tracking-wider text-[#824D3B] hover:opacity-80 transition-opacity">
-                    Read more &rarr;
-                  </a>
-                </div>
-              </article>
+              <PostCard 
+                key={index}
+                title={post.title}
+                date={post.date}
+                category={post.category}
+                excerpt={post.excerpt}
+                slug={post.slug}
+              />
             ))}
           </div>
         </section>
       </main>
 
-      {/* =====================================================================
-          5. FOOTER SECTION
-          ===================================================================== */}
-      <footer className="border-t border-[#E5E3DB] bg-[#FDFCF7] py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="text-sm text-[#AC9E85] font-mono">
-            &copy; 2025 Do Duc Khanh Nguyen. All rights reserved.
-          </div>
-        </div>
-      </footer>
-
+      <Footer />
     </div>
   );
 }
