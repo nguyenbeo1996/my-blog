@@ -1,16 +1,22 @@
 /* Phần 1: Import các thư viện cần thiết */
-import { Geist, Geist_Mono } from "next/font/google";/* hai kiểu chữ(font) từ Google */
+import { Geist, Geist_Mono, Merriweather } from "next/font/google";/* hai kiểu chữ(font) từ Google */
 import "./globals.css";/* file css global */
 
 /* Phần 2: Định nghĩa các biến css cho font geistSans và geistMono */
 const geistSans = Geist({
   variable: "--font-geist-sans",/* định nghĩa biến css cho font geistSans */
-  subsets: ["latin"],/* định nghĩa tập hợp các ký tự Latin */
+  subsets: ["vietnamese", "latin"],/* định nghĩa tập hợp các ký tự Latin */
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",/* định nghĩa biến css cho font geistMono */
-  subsets: ["latin"],/* định nghĩa tập hợp các ký tự Latin */
+  subsets: ["vietnamese", "latin"],/* định nghĩa tập hợp các ký tự Latin */
+});
+
+const merriweather = Merriweather({
+  variable: "--font-merriweather",
+  subsets: ["vietnamese"],
+  weight: ["400", "700"],
 });
 
 /* Phần 3: Định nghĩa metadata của trang web */
@@ -20,13 +26,17 @@ export const metadata = {
 };
 
 /* Phần 4: Định nghĩa RootLayout */
+import { LanguageProvider } from "./context/LanguageContext";
+
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="vi">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${merriweather.variable} antialiased`}
       >
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

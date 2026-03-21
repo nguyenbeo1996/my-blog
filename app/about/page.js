@@ -1,11 +1,19 @@
+"use client";
+
+import { useContext } from "react";
 import Image from "next/image";
 import portfolioImg from "../../public/images/portfolio.jpg";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SectionTitle from "../components/SectionTitle";
+import { LanguageContext } from "../context/LanguageContext";
+import { translations } from "../translations";
 
 export default function About() {
-  // Dữ liệu mạng xã hội
+  const { language } = useContext(LanguageContext);
+  const t = translations[language].about;
+  const h = translations[language].home; // Mượn mô tả từ trang home để tái sử dụng
+
   const socialLinks = [
     {
       name: "LinkedIn",
@@ -55,7 +63,7 @@ export default function About() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FDFCF7] text-[#2C2C2C] font-sans antialiased">
+    <div className="min-h-screen bg-[#FDFCF7] dark:bg-[#121211] text-[#2C2C2C] dark:text-[#E2E2E2] font-sans antialiased transition-colors duration-300">
       <Header />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
@@ -67,33 +75,28 @@ export default function About() {
           
           {/* Avatar frame */}
           <div className="flex-shrink-0 mx-auto md:mx-0">
-            <div className="max-w-xs border-2 border-[#AC9E85] p-1 bg-white shadow-md">
+            <div className="max-w-xs border-2 border-[#AC9E85] dark:border-[#40403F] p-1 bg-white dark:bg-[#1C1C1B] shadow-md hover:shadow-xl transform transition-all duration-300">
               <Image 
                 src={portfolioImg} 
                 alt="Do Duc Khanh Nguyen"
-                className="w-full h-auto filter sepia-[5%] contrast-[98%]"
+                className="w-full h-auto filter sepia-[5%] dark:sepia-0 contrast-[98%]"
                 priority
-                width={300}
-                height={300}
               />
             </div>
           </div>
 
           {/* Text Description */}
           <div className="flex-1">
-            <SectionTitle title="About" centered={false} />
-            <h2 className="text-lg font-medium text-[#824D3B] mb-6 font-mono">
+            <SectionTitle title={t.title} centered={false} />
+            <h2 className="text-lg font-medium text-[#824D3B] dark:text-[#D4A373] mb-6 font-mono">
               Transportation, Logistics & Data Engineer
             </h2>
-            <div className="space-y-4 text-[#5A5A5A] leading-relaxed">
+            <div className="space-y-4 text-[#5A5A5A] dark:text-[#A0A09C] leading-relaxed transition-colors">
               <p>
-                Hello there! I is a place where I shared my interests, experiences, and thoughts on various topics. 
+                {h.description}
               </p>
               <p>
-                I am a Transportation, Logistics & Data Engineer. I am passionate about Data Science, Computer Science and Technology. I have a strong interest in Sports and Health Science.
-              </p>
-              <p>
-                Thank you for stopping by!
+                {h.aboutText}
               </p>
             </div>
           </div>
@@ -102,9 +105,9 @@ export default function About() {
         {/* =====================================================================
             2. SOCIAL LINKS SECTION
             ==================================================================== */}
-        <div className="border-t border-[#E5E3DB] pt-12">
-          <h3 className="font-serif text-2xl font-bold mb-6 text-[#2C2C2C] text-center md:text-left">
-            Connect with Me
+        <div className="border-t border-[#E5E3DB] dark:border-[#2C2C2A] pt-12">
+          <h3 className="font-serif text-2xl font-bold mb-6 text-[#2C2C2C] dark:text-[#F3F4F6] text-center md:text-left transition-colors">
+            {t.connect}
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
             {socialLinks.map((link) => (
@@ -113,12 +116,12 @@ export default function About() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center justify-center p-5 border border-[#DCD5C6] rounded bg-white hover:bg-[#824D3B] hover:text-[#FDFCF7] hover:border-[#824D3B] text-[#824D3B] shadow-sm transition-all duration-300 group"
+                className="flex flex-col items-center justify-center p-5 border border-[#DCD5C6] dark:border-[#40403F] rounded bg-white dark:bg-[#1C1C1B] hover:bg-[#824D3B] dark:hover:bg-[#824D3B] hover:text-[#FDFCF7] hover:border-[#824D3B] text-[#824D3B] dark:text-[#D4A373] shadow-sm hover:scale-105 transform transition-all duration-300 group"
               >
                 <div className="mb-2 group-hover:scale-110 transition-transform duration-200">
                   {link.icon}
                 </div>
-                <span className="text-xs font-mono font-medium tracking-wide text-[#5A5A5A] group-hover:text-[#FDFCF7]">
+                <span className="text-xs font-mono font-medium tracking-wide text-[#5A5A5A] group-hover:text-[#FDFCF7] dark:text-[#A0A0A0]">
                   {link.name}
                 </span>
               </a>
