@@ -20,7 +20,7 @@ export default function PostCard({ title, date, category, excerpt, slug = "#" })
         </span>
       </div>
       
-      <h2 className="font-serif text-xl font-bold mb-3 group-hover:text-[#824D3B] dark:group-hover:text-[#D4A373] transition-colors leading-snug text-[#2C2C2C] dark:text-[#F3F4F6]">
+      <h2 className="font-sans text-xl font-bold mb-3 group-hover:text-[#824D3B] dark:group-hover:text-[#D4A373] transition-colors leading-snug text-[#2C2C2C] dark:text-[#F3F4F6]">
         <Link href={postLink}>{title.normalize("NFC")}</Link>
       </h2>
       

@@ -89,7 +89,7 @@ export default function About() {
           <div className="flex-1">
             <SectionTitle title={t.title} centered={false} />
             <h2 className="text-lg font-medium text-[#824D3B] dark:text-[#D4A373] mb-6 font-mono">
-              Transportation, Logistics & Data Engineer
+              {h.subtitle}
             </h2>
             <div className="space-y-4 text-[#5A5A5A] dark:text-[#A0A09C] leading-relaxed transition-colors">
               <p>

@@ -33,7 +33,7 @@ export default function Home() {
               Do Duc Khanh Nguyen
             </h1>
             <h2 className="text-lg md:text-xl font-medium text-[#824D3B] dark:text-[#D4A373] mb-6 font-mono tracking-wide">
-              Transportation, Logistics & Data Engineer
+              {t.subtitle}
             </h2>
             <p className="text-base md:text-lg text-[#5A5A5A] dark:text-[#A0A09C] mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed transition-colors">
               {t.description}

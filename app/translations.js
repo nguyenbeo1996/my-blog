@@ -2,6 +2,7 @@ export const translations = {
   vi: {
     nav: { Home: "Trang chủ", Blog: "Bài viết", About: "Giới thiệu" },
     home: {
+      subtitle: "Kỹ sư Vận tải, Logistics & Kỹ sư Dữ liệu",
       description: "Nơi chia sẻ sở thích, kinh nghiệm và góc nhìn cá nhân của tôi về đa dạng lĩnh vực. Hy vọng bạn thích nó...",
       readBlog: "Đọc bài viết",
       viewPortfolio: "Xem Portfolio",
@@ -48,6 +49,7 @@ export const translations = {
   en: {
     nav: { Home: "Home", Blog: "Blog", About: "About" },
     home: {
+      subtitle: "Transportation, Logistics & Data Engineer",
       description: "Here is a place where I shared my interests, experiences, and thoughts on various topics. I hope you enjoy it...",
       readBlog: "Read Blog",
       viewPortfolio: "View Portfolio",

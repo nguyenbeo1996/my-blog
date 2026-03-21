@@ -55,7 +55,7 @@ export default function Header() {
           
           {/* Logo/Name */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-3 font-serif text-xl font-bold tracking-tight hover:text-[#824D3B] dark:hover:text-[#D4A373] transition-colors dark:text-[#F3F4F6]">
+            <Link href="/" className="flex items-center space-x-3 font-sans text-xl font-bold tracking-tight hover:text-[#824D3B] dark:hover:text-[#D4A373] transition-colors dark:text-[#F3F4F6]">
               <Image 
                 src={iconImg} 
                 alt="Icon" 
@@ -92,11 +92,15 @@ export default function Header() {
               {/* Language Switcher */}
               <button
                 onClick={() => changeLanguage(language === "vi" ? "en" : "vi")}
-                className="flex items-center justify-center p-2 rounded-full border border-[#DCD5C6] dark:border-[#40403F] bg-white dark:bg-[#20201F] text-[#5A5A5A] hover:bg-[#F3EFDF] dark:hover:bg-[#2C2C2A] transition-all duration-200"
+                className="flex items-center justify-center p-1.5 rounded-full border border-[#DCD5C6] dark:border-[#40403F] bg-white dark:bg-[#20201F] hover:bg-[#F3EFDF] dark:hover:bg-[#2C2C2A] transition-all duration-200"
                 aria-label="Switch Language"
                 title={language === "vi" ? "Switch to English" : "Chuyển sang Tiếng Việt"}
               >
-                <span className="text-base">{language === "vi" ? "🇻🇳" : "🇬🇧"}</span>
+                <img 
+                  src={language === "vi" ? "https://flagcdn.com/w40/vn.png" : "https://flagcdn.com/w40/gb.png"} 
+                  alt={language === "vi" ? "Tiếng Việt" : "English"}
+                  className="h-3.5 w-5 object-cover rounded shadow-sm"
+                />
               </button>
 
               {/* Dark Mode Toggle */}
@@ -120,8 +124,12 @@ export default function Header() {
 
           {/* Mobile Section Controls */}
           <div className="flex items-center space-x-2 md:hidden">
-            <button onClick={() => changeLanguage(language === "vi" ? "en" : "vi")} className="p-1 border border-[#DCD5C6] dark:border-[#40403F]">
-              {language === "vi" ? "🇻🇳" : "🇬🇧"}
+            <button onClick={() => changeLanguage(language === "vi" ? "en" : "vi")} className="p-1 px-1.5 border border-[#DCD5C6] dark:border-[#40403F] rounded bg-white dark:bg-[#1C1C1B]">
+              <img 
+                src={language === "vi" ? "https://flagcdn.com/w40/vn.png" : "https://flagcdn.com/w40/gb.png"} 
+                className="h-3 w-4.5 object-cover" 
+                alt="Flag" 
+              />
             </button>
             <button onClick={toggleDarkMode} className="p-1 border border-[#DCD5C6] dark:border-[#40403F]">
               {isDarkMode ? "☀️" : "🌙"}
