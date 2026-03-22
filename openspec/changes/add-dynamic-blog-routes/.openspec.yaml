@@ -1,0 +1,15 @@
+name: add-dynamic-blog-routes
+description: Add dynamic blog post routes /blog/[slug] so each post has its own page with full content, navigation prev/next, and proper metadata for SEO
+status: proposed
+applyRequires:
+  - tasks
+artifacts:
+  proposal:
+    status: done
+    outputPath: openspec/changes/add-dynamic-blog-routes/proposal.md
+  design:
+    status: done
+    outputPath: openspec/changes/add-dynamic-blog-routes/design.md
+  tasks:
+    status: done
+    outputPath: openspec/changes/add-dynamic-blog-routes/tasks.md
