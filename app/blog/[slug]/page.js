@@ -20,9 +20,9 @@ export default function BlogPostPage({ params }) {
       <div className="min-h-screen bg-[#FDFCF7] dark:bg-[#121211] text-[#2C2C2C] dark:text-[#E2E2E2] font-sans antialiased">
         <Header />
         <main className="max-w-4xl mx-auto px-4 py-20 text-center">
-          <h1 className="text-2xl font-bold mb-4">Bài viết không tồn tại</h1>
+          <h1 className="text-2xl font-bold mb-4">{language === "vi" ? "Bài viết không tồn tại" : "Post not found"}</h1>
           <Link href="/blog" className="text-[#824D3B] dark:text-[#D4A373] hover:underline">
-            &larr; Quay lại danh sách
+            &larr; {language === "vi" ? "Quay lại danh sách" : "Back to Articles"}
           </Link>
         </main>
         <Footer />
