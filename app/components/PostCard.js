@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function PostCard({ title, date, category, excerpt, slug = "#" }) {
+export default function PostCard({ title, date, category, excerpt, slug = "#", searchQuery = "" }) {
   const categoryStyles = {
     "Data Analysis": "text-blue-700 bg-blue-50/70 border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800",
     "Life": "text-emerald-700 bg-emerald-50/70 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800",
@@ -10,6 +10,21 @@ export default function PostCard({ title, date, category, excerpt, slug = "#" })
   const currentStyle = categoryStyles[category] || "text-[#824D3B] dark:text-[#D4A373] bg-[#FDFCF7] dark:bg-[#1E1E1D] border-[#DCD5C6] dark:border-[#383835]";
 
   const postLink = slug.startsWith("#") ? "#" : `/blog/${slug}`;
+
+  // Hàm Highlight ký tự khớp
+  const highlightWord = (text, query) => {
+    if (!query || !query.trim()) return text;
+    const parts = text.split(new RegExp(`(${query})`, "gi"));
+    return parts.map((part, index) => 
+      part.toLowerCase() === query.toLowerCase() ? (
+        <mark key={index} className="bg-yellow-200 dark:bg-yellow-800 border border-yellow-300 dark:border-yellow-700 rounded px-0.5 text-[#2C2C2C] dark:text-[#F3F4F6]">
+          {part}
+        </mark>
+      ) : (
+        part
+      )
+    );
+  };
 
   return (
     <article className="flex flex-col bg-white dark:bg-[#1C1C1B] border border-[#E5E3DB] dark:border-[#2C2C2A] rounded p-6 shadow-sm hover:shadow-lg hover:scale-[1.02] transform transition-all duration-300 h-full group">
@@ -21,11 +36,11 @@ export default function PostCard({ title, date, category, excerpt, slug = "#" })
       </div>
       
       <h2 className="font-sans text-xl font-bold mb-3 group-hover:text-[#824D3B] dark:group-hover:text-[#D4A373] transition-colors leading-snug text-[#2C2C2C] dark:text-[#F3F4F6]">
-        <Link href={postLink}>{title.normalize("NFC")}</Link>
+        <Link href={postLink}>{highlightWord(title.normalize("NFC"), searchQuery)}</Link>
       </h2>
       
       <p className="text-sm text-[#5A5A5A] dark:text-[#A0A09C] mb-5 flex-grow leading-relaxed">
-        {excerpt.normalize("NFC")}
+        {highlightWord(excerpt.normalize("NFC"), searchQuery)}
       </p>
       
       <div className="mt-auto">
