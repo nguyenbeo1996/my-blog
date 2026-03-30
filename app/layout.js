@@ -30,8 +30,9 @@ import { LanguageProvider } from "./context/LanguageContext";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="vi">
+    <html lang="vi" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={`${geistSans.variable} ${geistMono.variable} ${merriweather.variable} antialiased`}
       >
         <LanguageProvider>
