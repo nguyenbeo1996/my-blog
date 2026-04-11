@@ -17,6 +17,14 @@ export default function Home() {
 
   const featuredPosts = translations[language].posts;
 
+  const handleScrollToAbout = (e) => {
+    e.preventDefault();
+    const element = document.getElementById("about");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#FDFCF7] dark:bg-[#121211] text-[#2C2C2C] dark:text-[#E2E2E2] font-sans antialiased transition-colors duration-300">
       <Header />
@@ -42,7 +50,7 @@ export default function Home() {
               <Link href="/blog" className="inline-flex items-center justify-center px-6 py-3 border border-[#824D3B] bg-[#824D3B] text-[#FDFCF7] font-medium rounded shadow-sm hover:bg-[#6B3E2F] hover:scale-105 transform transition-all duration-200">
                 {t.readBlog}
               </Link>
-              <Link href="#" className="inline-flex items-center justify-center px-6 py-3 border border-[#AC9E85] dark:border-[#40403F] text-[#2C2C2C] dark:text-[#F3F4F6] font-medium rounded hover:bg-[#F3EFDF] dark:hover:bg-[#1C1C1B] hover:scale-105 transform transition-all duration-200">
+              <Link href="#about" onClick={handleScrollToAbout} className="inline-flex items-center justify-center px-6 py-3 border border-[#AC9E85] dark:border-[#40403F] text-[#2C2C2C] dark:text-[#F3F4F6] font-medium rounded hover:bg-[#F3EFDF] dark:hover:bg-[#1C1C1B] hover:scale-105 transform transition-all duration-200">
                 {t.viewPortfolio}
               </Link>
             </div>
@@ -64,7 +72,7 @@ export default function Home() {
         {/* =====================================================================
             2. ABOUT SNIPPET
             ===================================================================== */}
-        <section className="bg-[#F3EFDF] dark:bg-[#181817] border-y border-[#E5E3DB] dark:border-[#2C2C2A] py-16 transition-colors duration-300">
+        <section id="about" className="bg-[#F3EFDF] dark:bg-[#181817] border-y border-[#E5E3DB] dark:border-[#2C2C2A] py-16 transition-colors duration-300">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h3 className="font-serif text-2xl font-bold mb-4 text-[#2C2C2C] dark:text-[#F3F4F6]">{t.aboutTitle}</h3>
             <p className="text-base md:text-lg text-[#4A4A4A] dark:text-[#A0A09C] leading-relaxed italic">

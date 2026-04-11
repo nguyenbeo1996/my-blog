@@ -29,3 +29,6 @@
 - Always add alt text to images
 - Always add loading="lazy" for non-critical images
 - Keep components small and focused
+
+## Testing Rules
+- Luôn kiểm tra output bằng cách mở trình duyệt với browser_subagent. Khi nào đúng theo yêu cầu mới kết thúc task để tránh user phải mất thời gian tự check.
