@@ -72,20 +72,19 @@ export default function PostForm({ initialData = null, isEdit = false }) {
     const contentEnArray = contentEn.split("\n").map(s => s.trim()).filter(Boolean);
     const contentViArray = contentVi.split("\n").map(s => s.trim()).filter(Boolean);
 
+    const today = new Date().toISOString().split("T")[0];
     const postData = {
       title_en: titleEn,
       title_vi: titleVi,
       slug,
       category,
-      date_iso: dateIso,
-      date: dateIso,
+      date_publish: dateIso,
+      date_update: today,
       published,
       excerpt_en: excerptEn,
       excerpt_vi: excerptVi,
       content_en: JSON.stringify(contentEnArray),
       content_vi: JSON.stringify(contentViArray),
-      // Set the date column logic (just keeping it as a display string if needed, though date_iso is preferred)
-      // The old format used localized string but date_iso is best for sorting
     };
 
     let res;

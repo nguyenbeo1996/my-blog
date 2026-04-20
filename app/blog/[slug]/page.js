@@ -44,8 +44,8 @@ function transformPost(row, language) {
       ? parseContent(row.content_vi)
       : parseContent(row.content_en),
     category: language === "vi" ? rawCategory : (CATEGORY_EN_MAP[rawCategory] || rawCategory),
-    date: formatDate(row.date_iso, language),
-    dateISO: row.date_iso,
+    date: formatDate(row.date_publish, language),
+    date_publish: row.date_publish,
     slug: row.slug,
   };
 }
@@ -95,10 +95,10 @@ export default function BlogPostPage({ params }) {
         // 2. Fetch the previous post (older, date_iso < current)
         const { data: prevRows } = await supabase
           .from("posts")
-          .select("slug, title_en, title_vi, date_iso")
+          .select("slug, title_en, title_vi, date_publish")
           .eq("published", true)
-          .lt("date_iso", currentRow.date_iso)
-          .order("date_iso", { ascending: false })
+          .lt("date_publish", currentRow.date_publish)
+          .order("date_publish", { ascending: false })
           .limit(1);
 
         setPrevPost(
@@ -113,10 +113,10 @@ export default function BlogPostPage({ params }) {
         // 3. Fetch the next post (newer, date_iso > current)
         const { data: nextRows } = await supabase
           .from("posts")
-          .select("slug, title_en, title_vi, date_iso")
+          .select("slug, title_en, title_vi, date_publish")
           .eq("published", true)
-          .gt("date_iso", currentRow.date_iso)
-          .order("date_iso", { ascending: true })
+          .gt("date_publish", currentRow.date_publish)
+          .order("date_publish", { ascending: true })
           .limit(1);
 
         setNextPost(

@@ -37,8 +37,9 @@ function transformPost(row, language) {
     excerpt: language === "vi" ? row.excerpt_vi : row.excerpt_en,
     // Display category in the active language
     category: language === "vi" ? rawCategory : (CATEGORY_EN_MAP[rawCategory] || rawCategory),
-    date: formatDate(row.date_iso, language),
-    dateISO: row.date_iso,
+    date: formatDate(row.date_publish, language),
+    date_publish: row.date_publish,
+    date_update: row.date_update,
     slug: row.slug,
   };
 }
@@ -69,7 +70,7 @@ export default function BlogListing() {
           .from("posts")
           .select("*")
           .eq("published", true)
-          .order("date_iso", { ascending: false });
+          .order("date_publish", { ascending: false });
 
         if (fetchError) throw fetchError;
 
@@ -117,8 +118,8 @@ export default function BlogListing() {
 
   // Sort filtered posts
   const sortedPosts = [...filteredPosts].sort((a, b) => {
-    if (sortBy === "newest") return new Date(b.dateISO) - new Date(a.dateISO);
-    if (sortBy === "oldest") return new Date(a.dateISO) - new Date(b.dateISO);
+    if (sortBy === "newest") return new Date(b.date_publish) - new Date(a.date_publish);
+    if (sortBy === "oldest") return new Date(a.date_publish) - new Date(b.date_publish);
     if (sortBy === "az")
       return a.title
         .normalize("NFC")
