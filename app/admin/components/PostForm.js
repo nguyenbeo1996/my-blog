@@ -78,6 +78,7 @@ export default function PostForm({ initialData = null, isEdit = false }) {
       slug,
       category,
       date_iso: dateIso,
+      date: dateIso,
       published,
       excerpt_en: excerptEn,
       excerpt_vi: excerptVi,
